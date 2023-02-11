@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Employer {
 
+    //Some properties
     private int id;
     private static int nextId = 1;
     private String value;
@@ -12,7 +13,7 @@ public class Employer {
         id = nextId;
         nextId++;
     }
-
+//empty constructor??
     public Employer(String value) {
         this();
         this.value = value;
