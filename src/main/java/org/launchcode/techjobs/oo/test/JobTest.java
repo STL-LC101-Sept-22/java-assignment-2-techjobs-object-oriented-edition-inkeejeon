@@ -3,7 +3,14 @@ package org.launchcode.techjobs.oo.test;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.launchcode.techjobs.oo.CoreCompetency;
+//import org.launchcode.techjobs.oo.CoreCompetency;
+//import org.launchcode.techjobs.oo.Employer;
+//import org.launchcode.techjobs.oo.Location;
+//import org.launchcode.techjobs.oo.PositionType;
+//
+//import org.launchcode.techjobs.oo.Job;
+import org.launchcode.techjobs.oo.*;
+import static org.junit.Assert.*;
 
 /**
  * Created by LaunchCode
@@ -31,15 +38,15 @@ public class JobTest {
       Job testJob =  new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
       // Use assertTrue and assertEquals statements to test that the constructor correctly assigns both the class and value of each field. Your test should have 5 assert statements of each type.
       assertTrue(testJob.getName() instanceof String);
-      asserEquals(testJob.getName(), "Product tester");
+      assertEquals(testJob.getName(), "Product tester");
       assertTrue(testJob.getEmployer() instanceof Employer);
-      asserEquals(testJob.getEmployer(), "ACME");
+      assertEquals(testJob.getEmployer(), "ACME");
       assertTrue(testJob.getLocation() instanceof Location);
-      asserEquals(testJob.getLocation(), "Desert");
+      assertEquals(testJob.getLocation(), "Desert");
       assertTrue(testJob.getPositionType() instanceof PositionType);
-      asserEquals(testJob.getPositionType(), "Quality control");
+      assertEquals(testJob.getPositionType(), "Quality control");
       assertTrue(testJob.getCoreCompetency() instanceof CoreCompetency);
-      asserEquals(testJob.getCoreCompetency(), "Persistence");
+      assertEquals(testJob.getCoreCompetency(), "Persistence");
     }
   //  In JobTest, define a test called testJobsForEquality.
     @Test
@@ -51,8 +58,45 @@ public class JobTest {
         //assertFalse(jobOne.equals(jobTwo));
     }
 
+  // add a new test named testToStringStartsAndEndsWithNewLine to check the first requirement.
+    // Be sure to use assertEquals to verify that these characters are correct, and to use the exact formatting demonstrated above.
 
+    // Requirements
+    // 1. When passed a Job object, it should return a string that contains a blank line before and after the job information.
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job testJob =  new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        //TA help
+        assertEquals(testJob.toString().charAt(0), '\n');
+        assertEquals(testJob.toString().charAt(testJob.toString().length() - 1), '\n');
+    }
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job testJob =  new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String expectedValue =
+                "\n" +
+                        "ID: " + testJob.getId() +
+                        "\nName: " + testJob.getName() +
+                        "\nEmployer: " + testJob.getEmployer() +
+                        "\nLocation: " + testJob.getLocation() +
+                        "\nPosition Type: " + testJob.getPositionType() +
+                        "\nCore Competency: " + testJob.getCoreCompetency() +
+                        "\n";
+        String actualValue = testJob.toString();
+        assertEquals(expectedValue, actualValue);
+    }
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job testJob =  new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
 
-
+        assertEquals(testJob.toString(), "\n" +
+                "ID: " + testJob.getId() +
+                "\nName: Data not available"  +
+                "\nEmployer: Data not available"  +
+                "\nLocation: Data not available" +
+                "\nPosition Type: Data not available" +
+                "\nCore Competency: Data not available" +
+                "\n");
+    }
 
 }
